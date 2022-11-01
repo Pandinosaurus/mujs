@@ -135,7 +135,6 @@ static void Ap_pop(js_State *J)
 
 	if (n > 0) {
 		js_getindex(J, 0, n - 1);
-		js_delindex(J, 0, n - 1);
 		js_setlength(J, 0, n - 1);
 	} else {
 		js_setlength(J, 0, 0);
@@ -209,7 +208,6 @@ static void Ap_shift(js_State *J)
 			js_delindex(J, 0, k - 1);
 	}
 
-	js_delindex(J, 0, len - 1);
 	js_setlength(J, 0, len - 1);
 }
 
@@ -362,8 +360,6 @@ static void Ap_splice(js_State *J)
 			else
 				js_delindex(J, 0, k + add);
 		}
-		for (k = len; k > len - del + add; --k)
-			js_delindex(J, 0, k - 1);
 	} else if (add > del) {
 		for (k = len - del; k > start; --k) {
 			if (js_hasindex(J, 0, k + del - 1))
